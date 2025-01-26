@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Kotlin Basics</string>
+    <string name="sign_up">Sign Up / Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="workplace">Workplace</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="enter_your_email">Enter your Email</string>
+    <string name="select_your_gender">Select Your Gender</string>
+    <string name="space_nstation">Space\nStation</string>
+</resources>
