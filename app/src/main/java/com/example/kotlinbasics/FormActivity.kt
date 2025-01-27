@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class FormActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,83 +26,66 @@ class FormActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val etName = findViewById<EditText>(R.id.name)
-        val etWorkPlace = findViewById<EditText>(R.id.workPlace)
-        val etMail = findViewById<EditText>(R.id.eMail)
-        val etPassword = findViewById<EditText>(R.id.password)
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
-        val checkBoxC = findViewById<CheckBox>(R.id.cLanguage)
-        val checkBoxCpp = findViewById<CheckBox>(R.id.cppLanguage)
-        val checkBoxKotlin = findViewById<CheckBox>(R.id.kotlinLanguage)
-        checkBoxC.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                Toast.makeText(this,"Selected : ${checkBoxC.text}",Toast.LENGTH_SHORT).show()
+        val name=findViewById<EditText>(R.id.name)
+        val workPlace=findViewById<EditText>(R.id.workPlace)
+        val eMail=findViewById<EditText>(R.id.eMail)
+        val password=findViewById<EditText>(R.id.password)
+        val radioGroup=findViewById<RadioGroup>(R.id.radioGroup)
+        val btnNext=findViewById<Button>(R.id.btnNext)
+        val cLanguage=findViewById<CheckBox>(R.id.cLanguage)
+        val cppLanguage=findViewById<CheckBox>(R.id.cppLanguage)
+        val kotlinLanguage=findViewById<CheckBox>(R.id.kotlinLanguage)
+
+        btnNext.setOnClickListener {
+            if (detailsValidate(name,workPlace,eMail,password,radioGroup,cLanguage,cppLanguage,kotlinLanguage)){
+                println("Wow..")
             } else{
-                Toast.makeText(this,"Unselected : ${checkBoxC.text}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Enter all fields..",Toast.LENGTH_SHORT).show()
             }
         }
-        checkBoxCpp.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                Toast.makeText(this,"Selected : ${checkBoxCpp.text}",Toast.LENGTH_SHORT).show()
+        cLanguage.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                Toast.makeText(this,"${cLanguage.text} box checked",Toast.LENGTH_SHORT).show()
             }
-        }
-        checkBoxKotlin.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                Toast.makeText(this,"Selected : ${checkBoxKotlin.text}",Toast.LENGTH_SHORT).show()
+            else{
+                Toast.makeText(this,"${cLanguage.text} box unchecked",Toast.LENGTH_SHORT).show()
             }
         }
         radioGroup.setOnCheckedChangeListener { _, radioBtnId ->
-            val radioBtn = findViewById<RadioButton>(radioBtnId)
-            Toast.makeText(this,"Selected: ${radioBtn.text}",Toast.LENGTH_SHORT).show()
-        }
-        btnLogin.setOnClickListener {
-            if (validateDetails(etName, etWorkPlace, etMail, etPassword, radioGroup)) {
-                val name = etName.text.toString().trim()
-                val workplace = etWorkPlace.text.toString().trim()
-                val mail = etMail.text.toString().trim()
-                val password = etPassword.text.toString().trim()
-                val radioBtn = findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-                val gender = radioBtn.text.toString()
-                println("eddr $name $workplace $mail $password $gender")
-            } else {
-                Toast.makeText(this, "Enter the Values", Toast.LENGTH_SHORT).show()
-            }
+            val radioButton=findViewById<RadioButton>(radioBtnId)
+            Toast.makeText(this,"${radioButton.text} is selected",Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun validateDetails(
-        etName: EditText,
-        etWorkPlace: EditText,
-        etMail: EditText,
-        etPassword: EditText,
-        radioGroup: RadioGroup
-    ): Boolean {
-        var isValid = true
-        val name = etName.text.toString().trim()
-        if (name.isEmpty()) {
-            isValid = false
-            etName.error = "Enter Your Name"
+    private fun detailsValidate(name: EditText, workPlace: EditText, eMail: EditText, password: EditText, radioGroup: RadioGroup,
+        cLanguage: CheckBox, cppLanguage: CheckBox, kotlinLanguage: CheckBox): Boolean {
+        var value = true
+        if(name.text.toString().trim().isEmpty()){
+            name.error = "Enter name"
+            value = false
         }
-        val workplace = etWorkPlace.text.toString().trim()
-        if (workplace.isEmpty()) {
-            isValid = false
-            etWorkPlace.error = "Enter Your Workplace"
+        if(workPlace.text.toString().trim().isEmpty()){
+            workPlace.error = "Enter Workplace"
+            value = false
         }
-        val mail = etMail.text.toString().trim()
-        if (mail.isEmpty()) {
-            isValid = false
-            etMail.error = "Enter Your Mail"
+        if(eMail.text.toString().trim().isEmpty()){
+            eMail.error = "Enter Email"
+            value = false
         }
-        val password = etPassword.text.toString().trim()
-        if (password.isEmpty()) {
-            isValid = false
-            etPassword.error = "Enter your Password"
+        if(password.text.toString().trim().isEmpty()){
+            password.error = "Enter Password"
+            value = false
         }
         if (radioGroup.checkedRadioButtonId == -1) {
-            isValid = false
             Toast.makeText(this, "Select Gender", Toast.LENGTH_SHORT).show()
+            value = false
         }
-        return isValid
+        if (!cLanguage.isChecked && !cppLanguage.isChecked && !kotlinLanguage.isChecked) {
+            Toast.makeText(this, "Please select any Option", Toast.LENGTH_SHORT).show()
+            value = false
+        }
+        return value
     }
+
+
 }
