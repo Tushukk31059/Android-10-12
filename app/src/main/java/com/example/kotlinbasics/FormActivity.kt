@@ -58,7 +58,7 @@ class FormActivity : AppCompatActivity() {
     }
 
     private fun detailsValidate(name: EditText, workPlace: EditText, eMail: EditText, password: EditText, radioGroup: RadioGroup,
-        cLanguage: CheckBox, cppLanguage: CheckBox, kotlinLanguage: CheckBox): Boolean {
+                                cLanguage: CheckBox, cppLanguage: CheckBox, kotlinLanguage: CheckBox): Boolean {
         var value = true
         if(name.text.toString().trim().isEmpty()){
             name.error = "Enter name"
