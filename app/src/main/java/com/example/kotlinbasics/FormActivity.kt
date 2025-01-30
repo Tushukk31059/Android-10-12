@@ -1,5 +1,6 @@
 package com.example.kotlinbasics
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -27,6 +28,7 @@ class FormActivity : AppCompatActivity() {
             insets
         }
         val name=findViewById<EditText>(R.id.name)
+        val btnNextPage=findViewById<Button>(R.id.btnNextPage)
         val workPlace=findViewById<EditText>(R.id.workPlace)
         val eMail=findViewById<EditText>(R.id.eMail)
         val password=findViewById<EditText>(R.id.password)
@@ -35,6 +37,10 @@ class FormActivity : AppCompatActivity() {
         val cLanguage=findViewById<CheckBox>(R.id.cLanguage)
         val cppLanguage=findViewById<CheckBox>(R.id.cppLanguage)
         val kotlinLanguage=findViewById<CheckBox>(R.id.kotlinLanguage)
+        btnNextPage.setOnClickListener{
+            var intent= Intent(this,ConstarintLayoutII::class.java)
+                 startActivity(intent)
+        }
 
         btnNext.setOnClickListener {
             if (detailsValidate(name,workPlace,eMail,password,radioGroup,cLanguage,cppLanguage,kotlinLanguage)){
