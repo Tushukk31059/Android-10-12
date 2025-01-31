@@ -1,5 +1,6 @@
 package com.example.kotlinbasics
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -15,7 +16,8 @@ import androidx.core.view.WindowInsetsCompat
 
 class FormActivity : AppCompatActivity() {
 
-
+    private lateinit var selectedGender : String
+    private val listLanguages : ArrayList<String> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,21 +40,46 @@ class FormActivity : AppCompatActivity() {
 
         btnNext.setOnClickListener {
             if (detailsValidate(name,workPlace,eMail,password,radioGroup,cLanguage,cppLanguage,kotlinLanguage)){
-                println("Wow..")
+                val intent = Intent(this,ShowFormAct::class.java)
+                intent.putExtra("name",name.text.toString().trim())
+                intent.putExtra("workplace",workPlace.text.toString().trim())
+                intent.putExtra("mail",eMail.text.toString().trim())
+                intent.putExtra("password",password.text.toString().trim())
+                intent.putExtra("gender",selectedGender)
+
+                startActivity(intent)
             } else{
                 Toast.makeText(this,"Enter all fields..",Toast.LENGTH_SHORT).show()
             }
         }
         cLanguage.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
-                Toast.makeText(this,"${cLanguage.text} box checked",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"You Selected : ${cLanguage.text}",Toast.LENGTH_SHORT).show()
+                listLanguages.add(cLanguage.text.toString())
             }
             else{
-                Toast.makeText(this,"${cLanguage.text} box unchecked",Toast.LENGTH_SHORT).show()
+                listLanguages.remove(cLanguage.text.toString())
+            }
+        }
+        cppLanguage.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                Toast.makeText(this,"you Selected: ${cppLanguage.text}",Toast.LENGTH_SHORT).show()
+                listLanguages.add(cppLanguage.text.toString())
+            } else{
+                listLanguages.remove(cppLanguage.text.toString())
+            }
+        }
+        kotlinLanguage.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                Toast.makeText(this,"you Entered: ${kotlinLanguage.text}",Toast.LENGTH_SHORT).show()
+                listLanguages.add(kotlinLanguage.text.toString())
+            } else{
+                listLanguages.remove(kotlinLanguage.text.toString())
             }
         }
         radioGroup.setOnCheckedChangeListener { _, radioBtnId ->
             val radioButton=findViewById<RadioButton>(radioBtnId)
+            selectedGender = radioButton.text.toString()
             Toast.makeText(this,"${radioButton.text} is selected",Toast.LENGTH_SHORT).show()
         }
     }
@@ -86,6 +113,8 @@ class FormActivity : AppCompatActivity() {
         }
         return value
     }
+
+
 
 
 }
