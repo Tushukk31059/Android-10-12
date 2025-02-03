@@ -2,6 +2,7 @@ package com.example.kotlinbasics
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -46,6 +47,7 @@ class FormActivity : AppCompatActivity() {
                 intent.putExtra("mail",eMail.text.toString().trim())
                 intent.putExtra("password",password.text.toString().trim())
                 intent.putExtra("gender",selectedGender)
+                intent.putStringArrayListExtra("listLanguages",listLanguages)
 
                 startActivity(intent)
             } else{
@@ -95,8 +97,8 @@ class FormActivity : AppCompatActivity() {
             workPlace.error = "Enter Workplace"
             value = false
         }
-        if(eMail.text.toString().trim().isEmpty()){
-            eMail.error = "Enter Email"
+        if(eMail.text.toString().trim().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(eMail.text.toString()).matches()){
+            eMail.error = "Enter Correct Email"
             value = false
         }
         if(password.text.toString().trim().isEmpty()){
