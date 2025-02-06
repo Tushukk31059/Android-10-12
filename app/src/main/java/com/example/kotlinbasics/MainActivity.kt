@@ -1,15 +1,21 @@
 package com.example.kotlinbasics
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.kotlinbasics.databinding.ActivityMainBinding
+import com.example.kotlinbasics.databinding.CustomDialogBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -41,33 +47,50 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,ConstarintLayoutII::class.java))
         }
         binding.btnAlert.setOnClickListener {
-//            val alertDialogBuilder = AlertDialog.Builder(this)
-//            .setTitle("Confirmation")
-//            .setMessage("Do you wanna delete this")
-//            .setPositiveButton("Yes") { _, _ ->
-//                Toast.makeText(this,"You Pressed Yes..",Toast.LENGTH_SHORT).show()
-//            }
-//            .setNegativeButton("No") { _, _ ->
-//                Toast.makeText(this,"You Pressed No..",Toast.LENGTH_SHORT).show()
-//            }
-//            .setNeutralButton("Cancel"){_,_ ->
-//                Toast.makeText(this,"You Pressed Cancel..",Toast.LENGTH_SHORT).show()
-//            }.show()
-
-            val alertDialogBuilder = AlertDialog.Builder(this).apply {
-                setTitle("Confirmation")
-                setMessage("Do you wanna delete this")
-                setPositiveButton("Yes") { _, _ ->
-                    Toast.makeText(this@MainActivity,"You Pressed Yes..",Toast.LENGTH_SHORT).show()
+            val alertDialogBuilder = AlertDialog.Builder(this)
+                .apply {
+                    setTitle("Confirmation")
+                    setMessage("Do you wanna delete this")
+                    setPositiveButton("Yes"){_,_ ->
+                        Toast.makeText(this@MainActivity,"You Pressed Yes..",Toast.LENGTH_SHORT).show()
+                    }
+                    setNeutralButton("Cancel"){_,_ ->
+                        Toast.makeText(this@MainActivity,"You Pressed cancel..",Toast.LENGTH_SHORT).show()
+                    }
+                    setNegativeButton("No"){_,_ ->
+                        Toast.makeText(this@MainActivity,"You Pressed No..",Toast.LENGTH_SHORT).show()
+                    }
                 }
-                setNegativeButton("No") { _, _ ->
-                    Toast.makeText(this@MainActivity,"You Pressed No..",Toast.LENGTH_SHORT).show()
-                }
-                setNeutralButton("Cancel"){_,_ ->
-                    Toast.makeText(this@MainActivity,"You Pressed Cancel..",Toast.LENGTH_SHORT).show()
-                }.show()
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
+                val window = alertDialog.window
+                window?.setBackgroundDrawable(AppCompatResources.getDrawable(this,R.drawable.card_background_i))
+                window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+                val positiveBtn = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                positiveBtn.setTextColor(getColor(R.color.white))
+                positiveBtn.textSize = 20f
+                val fontFace = ResourcesCompat.getFont(this,R.font.raleway_font)
+                positiveBtn.setTypeface(fontFace,Typeface.NORMAL)
+        }
+        binding.btnCustom.setOnClickListener {
+            val dialog = Dialog(this)
+            val dialogBinding=CustomDialogBinding.inflate(layoutInflater)
+            dialog.setContentView(dialogBinding.root)
+            dialog.show()
+            dialog.setCancelable(false)
+            dialogBinding.btnCancel.setOnClickListener {
+                dialog.dismiss()
             }
-
+            dialogBinding.btnDelete.setOnClickListener {
+                Toast.makeText(this,"You clicked Delete",Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+            dialogBinding.imgCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            val customWindow= dialog.window
+            customWindow?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+            customWindow?.setBackgroundDrawable(AppCompatResources.getDrawable(this,R.drawable.custom_dialog_bg))
         }
     }
 }
