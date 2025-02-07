@@ -42,7 +42,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    //noinspection KtxExtensionAvailable,UseTomlInstead
+    implementation("androidx.navigation:navigation-fragment:2.8.6")
+    //noinspection KtxExtensionAvailable,UseTomlInstead
+    implementation("androidx.navigation:navigation-ui:2.8.6")
+
 }

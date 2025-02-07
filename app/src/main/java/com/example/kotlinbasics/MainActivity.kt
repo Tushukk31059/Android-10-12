@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        Toast.makeText(this,"On create ",Toast.LENGTH_SHORT).show()
         binding.btnForm.setOnClickListener {
             val intent= Intent(this,FormActivity::class.java)
             startActivity(intent)
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnConstraintII.setOnClickListener {
             startActivity(Intent(this,ConstarintLayoutII::class.java))
+            finish()
         }
         binding.btnAlert.setOnClickListener {
             val alertDialogBuilder = AlertDialog.Builder(this)
@@ -72,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                 val fontFace = ResourcesCompat.getFont(this,R.font.raleway_font)
                 positiveBtn.setTypeface(fontFace,Typeface.NORMAL)
         }
+        binding.btnFragment.setOnClickListener {
+            val fragmentIntent=Intent(this,FragmentActivity::class.java)
+            startActivity(fragmentIntent)
+        }
         binding.btnCustom.setOnClickListener {
             val dialog = Dialog(this)
             val dialogBinding=CustomDialogBinding.inflate(layoutInflater)
@@ -89,8 +95,30 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             val customWindow= dialog.window
-            customWindow?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+            customWindow?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
             customWindow?.setBackgroundDrawable(AppCompatResources.getDrawable(this,R.drawable.custom_dialog_bg))
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        Toast.makeText(this,"On start",Toast.LENGTH_SHORT).show()
+    }
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this,"On Resume",Toast.LENGTH_SHORT).show()
+    }
+    override fun onPause() {
+        super.onPause()
+        Toast.makeText(this,"On Pause",Toast.LENGTH_SHORT).show()
+    }
+    override fun onStop() {
+        super.onStop()
+        Toast.makeText(this,"On stop",Toast.LENGTH_SHORT).show()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Toast.makeText(this,"On Destroy",Toast.LENGTH_SHORT).show()
+    }
+
 }
