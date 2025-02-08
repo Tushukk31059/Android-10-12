@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/interaction_nav_graph"
+    app:startDestination="@id/interactFrag">
+
+    <fragment
+        android:id="@+id/interactFrag"
+        android:name="com.example.kotlinbasics.fragment.InteractFrag"
+        android:label="fragment_interact"
+        tools:layout="@layout/fragment_interact" />
+</navigation>
