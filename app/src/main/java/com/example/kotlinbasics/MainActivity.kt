@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.kotlinbasics.databinding.ActivityMainBinding
 import com.example.kotlinbasics.databinding.CustomDialogBinding
+import com.example.kotlinbasics.fragment.ActFragInteraction
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -43,6 +44,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnConstraint.setOnClickListener {
             startActivity(Intent(this,ConstraintActivity::class.java))
+        }
+        binding.btnInteraction.setOnClickListener {
+            startActivity(Intent(this,ActFragInteraction::class.java))
         }
         binding.btnConstraintII.setOnClickListener {
             startActivity(Intent(this,ConstarintLayoutII::class.java))

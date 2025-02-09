@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/default_frag_bg"
     tools:context=".fragment.InteractFrag">
@@ -14,6 +15,7 @@
         app:layout_constraintBottom_toTopOf="@id/btnFragPass"
         app:layout_constraintTop_toTopOf="parent">
         <EditText
+            android:id="@+id/etFragValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Value"/>

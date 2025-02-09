@@ -92,7 +92,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Fragment Activity"
+        android:textColor="@color/white"
         android:layout_marginTop="50dp"/>
+    <Button
+        android:id="@+id/btnInteraction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:text="Interaction Activity"
+        app:layout_constraintTop_toBottomOf="@id/btnFragment"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
