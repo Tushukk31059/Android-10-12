@@ -158,5 +158,15 @@
             android:paddingHorizontal="28dp"
             android:layout_marginTop="12dp"
             android:text="Next"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNextPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:cornerRadius="6dp"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="28dp"
+            android:layout_marginTop="12dp"
+            android:text="Next Page"/>
     </LinearLayout>
 </LinearLayout>
